@@ -20,4 +20,5 @@ Homestead.json
 .rocketeer/
 
 #ide files
-.idea/
+.idea/**
+_ide_helper.php
