@@ -23,10 +23,44 @@ class StoreController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+
     public function getStores()
     {
         $tailor = Auth::guard('tailor')->user();
-        return view('tailor.stores');
+        $stores = $tailor->stores;
+        return view('tailor.stores', compact('stores'));
+    }
+
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveStore(Request $request)
+    {
+        // Validate the form data
+        $this->validate($request, [
+        'name'   => 'required|string|min:5|max:255',
+        'phone' => 'required|string|min:5|max:255',
+        'address' => 'required|string|min:6|max:255',
+        'description' => 'required|string|min:10|max:255'
+    ]);
+
+
+        $store = new Store();
+        $store->name = $request->name;
+        $store->phone = $request->phone;
+        $store->address = $request->address;
+        $store->description = $request->description;
+        $store->tailor_id = Auth::guard('tailor')->user()->id;
+
+        $store->save();
+
+        return redirect()->route('tailor.stores')->with('success', 'Successfully Added Store!');
+
     }
 
 }

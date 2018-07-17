@@ -14,6 +14,8 @@
     <!-- This page CSS -->
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/pages/other-pages.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -222,7 +224,7 @@
                                 <div class=""><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="60"></div>
                                 <div class="m-l-10">
                                     <h4 class="m-b-0">Steave Jobs</h4>
-                                    <p class=" m-b-0"><a href="http://www.wrappixel.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8afcebf8ffe4caede7ebe3e6a4e9e5e7">[email&#160;protected]</a></p>
+                                    <p class=" m-b-0"><a href="" class="__cf_email__" data-cfemail="8afcebf8ffe4caede7ebe3e6a4e9e5e7">[email&#160;protected]</a></p>
                                 </div>
                             </div>
                             <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i> Wish List</a>
@@ -280,7 +282,7 @@
                             <li><a href="form-addons.html">Notification</a></li>
                             <li><a href="{{ route('user.profile') }}">Addresses</a></li>
                             <li><a href="form-float-input.html">Payments</a></li>
-                            <li><a href="form-pickers.html">My Measurements</a></li>
+                            <li><a href={{route('user.measurements')}}>My Measurements</a></li>
                         </ul>
                     </li>
                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-wallet"></i><span class="hide-menu">Shop</span></a>
@@ -313,6 +315,16 @@
 
     @yield('content')
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <!-- ============================================================== -->
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
@@ -320,7 +332,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-        © 2018 Elegent Admin by wrappixel.com
+        © 2018 {{env('APP_NAME')}}
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
@@ -348,7 +360,12 @@
 <!-- ============================================================== -->
 <!--sparkline JavaScript -->
 <script src="{{ asset('assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
-<!-- EASY PIE CHART JS -->
+<script src="{{ asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
+{{--<script src="{{  asset('js/pages/toastr.js') }}"></script>--}}
+{{--Notifications--}}
+
+@include('notifications.notification')
+
 @yield ('page-js')
 </body>
 

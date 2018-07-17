@@ -86,9 +86,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <label for="example-email3" class="col-md-12">Email</label>
                                             <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email3">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -139,7 +139,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <label for="example-email1" class="col-md-12">Email</label>
                                             <div class="col-md-12">
                                                 <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
                                             </div>
@@ -192,9 +192,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="example-email" class="col-md-12">Email</label>
+                                            <label for="example-email2" class="col-md-12">Email</label>
                                             <div class="col-md-12">
-                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                                <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email2">
                                             </div>
                                         </div>
                                         <div class="form-group">

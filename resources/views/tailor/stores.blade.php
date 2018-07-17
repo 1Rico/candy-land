@@ -6,6 +6,15 @@
 
 @section ('content')
     <div class="page-wrapper">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- ============================================================== -->
         <!-- Container fluid  -->
         <!-- ============================================================== -->
@@ -21,9 +30,10 @@
                     <div class="d-flex justify-content-end align-items-center">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Modals</li>
+                            <li class="breadcrumb-item active">Stores</li>
                         </ol>
-                        <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
+                        <button data-toggle="modal" data-target="#add-store-modal" type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
+
                     </div>
                 </div>
             </div>
@@ -34,83 +44,67 @@
             <!-- Start Page Content -->
             <!-- ============================================================== -->
             <div class="row">
+                @forelse($stores as $store)
+                    <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">{{$store->name ?? 'Unknown'}}<br><small>{{$store->description}}</small></h4>
+                            <img src="../assets/images/alert/model.png" alt="default" data-toggle="modal" data-target="#add-store-modal" class="model_img img-responsive" />
+                        </div>
+                    </div>
+                </div>
+                @empty
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Add a New Store</h4>
+                                <!-- sample modal content -->
+                                <img src="../assets/images/alert/model.png" alt="default" data-toggle="modal" data-target="#add-store-modal" class="model_img img-responsive" />
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
 
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Add a New Store</h4>
-                            <!-- sample modal content -->
-                            <div id="responsive-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Modal Content is Responsive</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                {{--Add New Stor Modal--}}
+                    <div id="add-store-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <form method="post" action="{{route('tailor.stores.new')}}">
+                                @csrf
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Store</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label for="name" class="control-label">Store Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" required>
                                         </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Recipient:</label>
-                                                    <input type="text" class="form-control" id="recipient-name">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="message-text" class="control-label">Message:</label>
-                                                    <textarea class="form-control" id="message-text"></textarea>
-                                                </div>
-                                            </form>
+                                        <div class="form-group">
+                                            <label for="phone" class="control-label">Phone</label>
+                                            <input type="number" class="form-control" id="phone" name="phone" required>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-danger waves-effect waves-light">Save changes</button>
+                                        <div class="form-group">
+                                            <label for="address" class="control-label">Address</label>
+                                            <input type="text" class="form-control" id="address" name="address" required>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="description" class="control-label">Description:</label>
+                                            <textarea class="form-control" id="description" name="description" required></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger waves-effect waves-light">Create Store</button>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /.modal -->
-                            <img src="../assets/images/alert/model.png" alt="default" data-toggle="modal" data-target="#responsive-modal" class="model_img img-responsive" />
+                            </form>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Modal based on trigger button</h4>
-                            <!-- sample modal content -->
-                            <div class="button-box">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">Open modal for @fat</button>
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Open modal for @getbootstrap</button>
-                            </div>
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="exampleModalLabel1">New message</h4>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Recipient:</label>
-                                                    <input type="text" class="form-control" id="recipient-name1">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="message-text" class="control-label">Message:</label>
-                                                    <textarea class="form-control" id="message-text1"></textarea>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Send message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.modal -->
-                        </div>
-                    </div>
-                </div>
+                {{--New Store Modal--}}
+
             </div>
             <!-- ============================================================== -->
             <!-- End PAge Content -->

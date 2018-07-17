@@ -14,6 +14,8 @@
     <!-- This page CSS -->
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/pages/other-pages.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -270,7 +272,7 @@
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Dispute</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Payments</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Account</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="{{route('tailor.stores')}}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Store</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{route('tailor.stores')}}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Stores</span></a></li>
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
@@ -293,7 +295,7 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-        © 2018 Elegent Admin by wrappixel.com
+        © 2018 {{ env('APP_NAME') }}
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
@@ -321,7 +323,12 @@
 <!-- ============================================================== -->
 <!--sparkline JavaScript -->
 <script src="{{ asset('assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
-<!-- EASY PIE CHART JS -->
+<script src="{{ asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
+{{--<script src="{{  asset('js/pages/toastr.js') }}"></script>--}}
+
+{{--Notifications--}}
+@include('notifications.notification')
+
 @yield ('page-js')
 </body>
 

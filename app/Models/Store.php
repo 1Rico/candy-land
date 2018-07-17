@@ -7,8 +7,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+//    protected $fillable = ['name', 'email', 'password',];
+
+    protected $guarded = [];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
     public function owner()
     {
         return $this->belongsTo(Tailor::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isActive()
+    {
+        return $this->status;
     }
 }

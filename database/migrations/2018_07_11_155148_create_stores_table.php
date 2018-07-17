@@ -15,13 +15,15 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('legal_name');
-            $table->text('business_description');
-            $table->string('address');
-            $table->string('country');
+            $table->string('name');
             $table->string('phone');
-            $table->string('zip_code');
+            $table->string('address');
+            $table->string('country')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->text('description');
+            $table->string('avatar');
             $table->string('tailor_id');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

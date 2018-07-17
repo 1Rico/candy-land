@@ -46,11 +46,12 @@ class sendUserActivation extends Notification
     {
         $user = $this->user;
         return (new MailMessage)
-            ->from(env('ADMIN_MAIL'))
+            ->success()
+            ->from(env('ADMIN_EMAIL'))
             ->subject('Successfully created new account')
             ->greeting(sprintf('Hello %s', $user->firstname))
             ->line('You have successfully registered to our system. Please activate your account.')
-            ->action('Click Here', route('user.activate', $user->activation_code))
+            ->action('Activate Account', route('user.activate', $user->activation_code))
             ->line('Thank you for using our application!');
     }
 
