@@ -20,7 +20,7 @@ class Store extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
 
-    public function owner()
+    public function tailor()
     {
         return $this->belongsTo(Tailor::class);
     }
@@ -32,4 +32,5 @@ class Store extends Model
     {
         return $this->status;
     }
+
 }

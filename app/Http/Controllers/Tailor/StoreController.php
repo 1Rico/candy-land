@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
 use Auth;
+use Crypt;
+use encrypt;
 
 
 /**
@@ -61,6 +63,12 @@ class StoreController extends Controller
 
         return redirect()->route('tailor.stores')->with('success', 'Successfully Added Store!');
 
+    }
+
+    public function viewStore($id)
+    {
+        $store = Store::findOrFail(Crypt::decryptString($id));
+        return view('tailor.store', compact('store'));
     }
 
 }

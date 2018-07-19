@@ -26,8 +26,9 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth'], 'namespace' => 'Us
 });
 
 Route::group(['prefix' => 'tailor'], function() {
-    //auth(login)
+
     Route::group(['namespace' => 'Auth\Tailor'], function() {
+        //auth(login)
         Route::get('login', 'TailorLoginController@showLoginForm')->name('tailor.login');
         Route::post('login', 'TailorLoginController@login')->name('tailor.login.submit');
         Route::get('logout', 'TailorLoginController@logout')->name('tailor.logout');
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'tailor'], function() {
         Route::get('profile', function () { return view('tailor.profile'); })->name('tailor.profile');
 //        Route::get('profile', 'ProfileContoller@index' )->name('tailor.profile');
         Route::get('stores', 'StoreController@getstores')->name('tailor.stores');
+        Route::get('stores/{id}', 'StoreController@viewstore')->name('tailor.stores.view');
         Route::post('stores/save', 'StoreController@saveStore')->name('tailor.stores.new');
     });
 });

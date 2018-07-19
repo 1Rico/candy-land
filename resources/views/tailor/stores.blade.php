@@ -48,7 +48,7 @@
                     <div class="col-md-4">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">{{$store->name ?? 'Unknown'}}<br><small>{{$store->description}}</small></h4>
+                            <h4 class="card-title"><a href="{{route('tailor.stores.view', Crypt::encryptString($store->id))}}">{{$store->name ?? 'Unknown'}}</a><br><small>{{$store->description}}</small></h4>
                             <img src="../assets/images/alert/model.png" alt="default" data-toggle="modal" data-target="#add-store-modal" class="model_img img-responsive" />
                         </div>
                     </div>
