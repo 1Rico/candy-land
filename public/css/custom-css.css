@@ -1,0 +1,8 @@
+.fixed-height{
+    /*should be applied majorly to cards*/
+    min-height: 100%;
+}
+
+.hide{
+    display: none;
+}

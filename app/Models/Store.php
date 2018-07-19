@@ -25,6 +25,11 @@ class Store extends Model
         return $this->belongsTo(Tailor::class);
     }
 
+    public function designs()
+    {
+        return $this->hasMany(Design::class);
+    }
+
     /**
      * @return mixed
      */

@@ -14,6 +14,7 @@
     <!-- This page CSS -->
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <link href="{{ asset('css/pages/other-pages.css') }}" rel="stylesheet">
 
@@ -265,7 +266,7 @@
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Products</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('tailor.designs') }}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Designs</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Orders</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Coupons</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Messages</span></a></li>

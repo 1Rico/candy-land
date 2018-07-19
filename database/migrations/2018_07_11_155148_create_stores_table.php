@@ -21,7 +21,7 @@ class CreateStoresTable extends Migration
             $table->string('country')->nullable();
             $table->string('zip_code')->nullable();
             $table->text('description');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('tailor_id');
             $table->integer('status')->default(0);
             $table->timestamps();

@@ -22,7 +22,7 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth'], 'namespace' => 'Us
     Route::get('/', 'UserController@index')->name('user.dashboard');
     Route::get('profile', function () { return view('user.profile'); })->name('user.profile');
     Route::get('measurements', 'MeasurementController@getMeasurements')->name('user.measurements');
-    Route::post('measurements/save', 'MeasurementController@saveMeasurement')->name('user.measurements.new');
+    Route::post('measurements/save', 'MeasurementController@saveMeasurement')->name('user.measurements.save');
 });
 
 Route::group(['prefix' => 'tailor'], function() {
@@ -39,11 +39,16 @@ Route::group(['prefix' => 'tailor'], function() {
     });
 
     Route::group(['namespace' => 'Tailor', 'middleware' => ['auth:tailor']], function() {
+
         Route::get('/', 'TailorController@index')->name('tailor.dashboard');
         Route::get('profile', function () { return view('tailor.profile'); })->name('tailor.profile');
 //        Route::get('profile', 'ProfileContoller@index' )->name('tailor.profile');
         Route::get('stores', 'StoreController@getstores')->name('tailor.stores');
         Route::get('stores/{id}', 'StoreController@viewstore')->name('tailor.stores.view');
         Route::post('stores/save', 'StoreController@saveStore')->name('tailor.stores.new');
+        Route::get('designs', 'DesignController@getDesigns')->name('tailor.designs');
+        Route::get('designs/create', 'DesignController@createDesign')->name('tailor.designs.create');
+        Route::post('designs/save', 'DesignController@saveDesign')->name('tailor.designs.save');
+
     });
 });

@@ -32,4 +32,10 @@ class Tailor extends Authenticatable
     {
         return $this->hasMany(Store::class);
     }
+
+    public function designs()
+    {
+        return $this->hasManyThrough(Design::class, Store::class);
+    }
+
 }

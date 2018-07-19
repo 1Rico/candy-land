@@ -50,16 +50,17 @@ class StoreController extends Controller
         'address' => 'required|string|min:6|max:255',
         'description' => 'required|string|min:10|max:255'
     ]);
-
-
-        $store = new Store();
-        $store->name = $request->name;
-        $store->phone = $request->phone;
-        $store->address = $request->address;
-        $store->description = $request->description;
-        $store->tailor_id = Auth::guard('tailor')->user()->id;
-
-        $store->save();
+        $data = $request->all();
+        $data['tailor_id'] = Auth::guard('tailor')->user()->id;
+        Store::create($data);
+//        $store = new Store();
+//        $store->name = $request->name;
+//        $store->phone = $request->phone;
+//        $store->address = $request->address;
+//        $store->description = $request->description;
+//        $store->tailor_id = Auth::guard('tailor')->user()->id;
+//
+//        $store->save();
 
         return redirect()->route('tailor.stores')->with('success', 'Successfully Added Store!');
 
