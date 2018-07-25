@@ -3,32 +3,31 @@
 namespace App\Http\Controllers\Tailor;
 
 use App\Models\Design;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use Auth;
 
 class DesignController extends Controller
 {
+    private $photos_path;
+
+    public function __construct()
+    {
+        $this->photos_path = public_path('assets/images');
+    }
+
     public function viewDesign()
     {
-        $design = Design::findOrFail(2);
-        $url = 'https://pumpandhodl.com/images/1.jpg';
-
-//        $design->addMediaFromUrl($url)->toMediaCollection();
-
-        $media = $design->getMedia();
-
-//        $mediaItems = $design->getMedia();
-//        $url = $mediaItems[2]->getUrl();
-//        dd($media);
 
     }
 
     public function getDesigns()
     {
         $tailor = Auth::guard('tailor')->User();
-//        dd($tailor->designs);
-        return view('tailor.designs', compact('tailor'));
+        $designs = $tailor->designs()->get();
+        return view('tailor.designs', compact('tailor', 'designs'));
     }
 
     public function createDesign()
@@ -40,7 +39,43 @@ class DesignController extends Controller
 
     public function saveDesign(Request $request)
     {
-        $data = $request->all();
-        $design = Design::create($data);
+        $design = new Design();
+        $design->name = $request->name;
+        $design->duration = $request->duration;
+        $design->description = $request->description;
+        $design->status = $request->status;
+        $design->amount = $request->amount;
+        $design->discount_amount = $request->discount_amount;
+        $design->store_id = $request->store_id;
+
+        $photos = $request->file('image');
+        $filename = str_replace(' ','-',$design->name.sha1(date('YmdHis')));
+
+        for ($i = 0; $i < count($photos); $i++) {
+            $photo = $photos[$i];
+//            $name = sha1(date('YmdHis') . str_random(30));
+//            $save_name = $name . '.' . $photo->getClientOriginalExtension();
+//            $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
+
+            $design->save();
+
+            $design
+                ->addMedia($photo)
+                ->usingName($filename)
+                ->toMediaCollection();
+
+//            Image::make($photo)
+//                ->resize(250, null, function ($constraints) {
+//                    $constraints->aspectRatio();
+//                });
+////                ->save($this->photos_path . '/' . $resize_name);
+//
+////            $photo->move($this->photos_path, $save_name);
+//
+//           dd($photo->getRealPath());
+              }
+
+
+        return redirect()->action('Tailor\DesignController@getDesigns')->with('success', 'Design Added Successfully');
     }
 }

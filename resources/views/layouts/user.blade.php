@@ -287,7 +287,8 @@
                     </li>
                     <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-wallet"></i><span class="hide-menu">Shop</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="table-basic.html">My Orders</a></li>
+                            <li><a href="{{ route('user.designs') }}">Designs</a></li>
+                            <li><a href="{{ route('user.orders') }}">My Orders</a></li>
                             <li><a href="table-layout.html">Messages</a></li>
                             <li><a href="table-data-table.html">Disputes</a></li>
                             <li><a href="table-footable.html">Kadi Credits</a></li>

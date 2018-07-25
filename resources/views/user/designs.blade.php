@@ -1,4 +1,4 @@
-@extends('layouts.tailor')
+@extends('layouts.user')
 
 @section('title')
     Designs
@@ -19,7 +19,7 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h4 class="text-themecolor">My Designs</h4>
+                    <h4 class="text-themecolor">All Designs</h4>
                 </div>
                 <div class="col-md-7 align-self-center text-right">
                     <div class="d-flex justify-content-end align-items-center">
@@ -27,7 +27,7 @@
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
                             <li class="breadcrumb-item active">Lightbox Popup</li>
                         </ol>
-                        <a href="{{ route('tailor.designs.create') }}" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</a>
+                        <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <!-- Start Page Content -->
             <!-- ============================================================== -->
             <div class="row">
-                <div id="designModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                <div id="orderModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -46,6 +46,63 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
                             <div class="modal-body">
+                                <div class="row" id="page1">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="shoulder_width" class="control-label">Shoulder Width</label>
+                                            <input type="text" value="{{$user->measurement->shoulder_width}}" class="form-control" id="shoulder_width" name="shoulder_width" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="arm_hole" class="control-label">Arm Hole</label>
+                                            <input type="number" value="{{$user->measurement->arm_hole}}" class="form-control" id="arm_hole" name="arm_hole" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="arm_length" class="control-label">Arm Length</label>
+                                            <input type="text" class="form-control" value="{{$user->measurement->arm_or_sleeve_length}}" id="" name="arm_or_sleeve_length" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pant_length" class="control-label">Pant Length</label>
+                                            <input class="form-control" value="{{$user->measurement->pant_or_skirt_length}}" id="pant_or_skirt_length" name="pant_or_skirt_length" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inseam" class="control-label">Inseam:</label>
+                                            <input class="form-control" value="{{$user->measurement->inseam}}" id="inseam" name="inseam" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="wrist" class="control-label">Wrist:</label>
+                                            <input class="form-control" value="{{$user->measurement->wrist}}" id="wrist" name="wrist" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="neck" class="control-label">Neck </label>
+                                            <input type="text" class="form-control" value="{{$user->measurement->neck}}" id="neck" name="neck" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="chest_bust" class="control-label">Chest Bust</label>
+                                            <input type="number" class="form-control" value="{{$user->measurement->chest_bust}}" id="chest_bust" name="chest_bust" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="high_bust" class="control-label">Pant/High Burst</label>
+                                            <input type="text" class="form-control" value="{{$user->measurement->high_bust}}" id="high_bust" name="high_bust" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="under_bust" class="control-label">Under Wrist</label>
+                                            <input class="form-control" id="under_bust" value="{{$user->measurement->under_bust}}" name="under_bust" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="waist" class="control-label">Waist</label>
+                                            <input class="form-control" id="waist" name="waist" value="{{$user->measurement->waist}}" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="hips" class="control-label">Hips</label>
+                                            <input class="form-control" id="hips" name="hips" value="{{$user->measurement->hips}}" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="page2" style="display: none;">
                                     <div class="col-lg-12">
                                         <div class="card">
                                             <img class="card-img-top img-responsive" src="../assets/images/big/img1.jpg" alt="Card image cap">
@@ -58,11 +115,12 @@
                                                     <p class="card-text" id="amount">
                                                         <br><small class="text-danger" id="discount_amount" style="text-decoration: line-through">24000</small></p>
                                                     <input type="hidden" value="" name="data" id="data">
-                                                    {{--<button class="btn btn-primary" type="submit">Confirm</button>--}}
+                                                    <button class="btn btn-primary" type="submit">Confirm</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
@@ -74,7 +132,7 @@
                 </div>
             </div>
             <div class="row">
-                @forelse($designs as $design)
+                @forelse($designs as  $design)
                     @php $images = $design->getMedia();
                     @endphp
                     <div class="col-lg-3 col-md-6">
@@ -92,7 +150,7 @@
                                 </div>
 
                                 {{--<div class="col-md-4 hide">--}}
-                                {{--<a href="{{ $images[2]->getUrl() ?? $images[2]->getUrl() }}"> <img src="{{ $images[2]->getUrl() ?? $images[2]->getUrl() }}" class="img-responsive" alt="img" /> </a>--}}
+                                    {{--<a href="{{ $images[2]->getUrl() ?? $images[2]->getUrl() }}"> <img src="{{ $images[2]->getUrl() ?? $images[2]->getUrl() }}" class="img-responsive" alt="img" /> </a>--}}
                                 {{--</div>--}}
                             </div>
                             <div class="card-body">
@@ -102,7 +160,7 @@
                                 <p class="card-text">Store: <a href="javascript:void(0)">{{$design->store->name ?? ''}}</a></p>
 
                                 <a href="javascript:void(0)" data-toggle="modal"
-                                   data-target="#designModal"
+                                   data-target="#orderModal"
                                    data-tailor_name = {{$design->store->tailor->firstname}} {{$design->store->tailor->lastname}}
                                            data-tailor_id = {{$design->store->tailor->id}}
                                 data-discount_amount={{$design->discount_amount}}
@@ -112,7 +170,7 @@
                                 data-duration = "{{$design->duration}}"
                                 data-name="{{$design->name}}"
                                 data-amount={{$design->amount}}
-                                class="btn btn-primary">View
+                                class="btn btn-primary">Order
                                 </a>
                             </div>
                         </div>
@@ -122,10 +180,10 @@
                     <div class="col-lg-3 col-md-6">
                         <!-- Card -->
                         <div class="card" >
-                           <div class="card-body">
-                                <h4 class="card-title">Please Add A Design</h4>
-                                <p class="card-text">Populate your designs view to attract customers</p>
-                                <a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+                            <div class="card-body">
+                                <h4 class="card-title">No Designs Available FOr Now!</h4>
+                                <p class="card-text">Please check back at a later time.</p>
+                                {{--<a href="javascript:void(0)" class="btn btn-primary">Make Order</a>--}}
                             </div>
                         </div>
                         <!-- Card -->
@@ -149,36 +207,36 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="card">--}}
-                        {{--<div class="card-body">--}}
-                            {{--<div id="image-popups" class="row">--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img1.jpg" data-effect="mfp-zoom-in"><img src="../assets/images/big/img1.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Zoom</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img2.jpg" data-effect="mfp-newspaper"><img src="../assets/images/big/img2.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Newspaper</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img3.jpg" data-effect="mfp-move-horizontal"><img src="../assets/images/big/img3.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Horizontal move</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img4.jpg" data-effect="mfp-move-from-top"><img src="../assets/images/big/img4.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Move from top</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img5.jpg" data-effect="mfp-3d-unfold"><img src="../assets/images/big/img5.jpg" class="img-responsive" />--}}
-                                        {{--<br/>3d unfold</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img6.jpg" data-effect="mfp-zoom-out"><img src="../assets/images/big/img5.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Zoom-out</a>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="image-popups" class="row">
+                                <div class="col-lg-2 col-md-4">
+                                    <a href="../assets/images/big/img1.jpg" data-effect="mfp-zoom-in"><img src="../assets/images/big/img1.jpg" class="img-responsive" />
+                                        <br/>Zoom</a>
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <a href="../assets/images/big/img2.jpg" data-effect="mfp-newspaper"><img src="../assets/images/big/img2.jpg" class="img-responsive" />
+                                        <br/>Newspaper</a>
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <a href="../assets/images/big/img3.jpg" data-effect="mfp-move-horizontal"><img src="../assets/images/big/img3.jpg" class="img-responsive" />
+                                        <br/>Horizontal move</a>
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <a href="../assets/images/big/img4.jpg" data-effect="mfp-move-from-top"><img src="../assets/images/big/img4.jpg" class="img-responsive" />
+                                        <br/>Move from top</a>
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <a href="../assets/images/big/img5.jpg" data-effect="mfp-3d-unfold"><img src="../assets/images/big/img5.jpg" class="img-responsive" />
+                                        <br/>3d unfold</a>
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <a href="../assets/images/big/img6.jpg" data-effect="mfp-zoom-out"><img src="../assets/images/big/img5.jpg" class="img-responsive" />
+                                        <br/>Zoom-out</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -198,8 +256,18 @@
 
     <script>
         $(document).ready(function() {
+            var user_id = '{{$user->id}}';
 
-            $('#designModal').on('show.bs.modal', function (event) {
+            $('#next').click(function () {
+                $('#page1').hide();
+                $('#page2').fadeIn();
+            });
+            $('#previous').click(function () {
+                $('#page2').hide();
+                $('#page1').fadeIn();
+            });
+
+            $('#orderModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget); // Button that triggered the modal
                 var design_id = button.data('design_id');// Extract info from data-* attributes
                 var amount = button.data('amount');
@@ -212,7 +280,7 @@
 
                 var order_data = {
                     'design_id' : design_id,
-//                    'user_id' : user_id,
+                    'user_id' : user_id,
                     'tailor_id' : tailor_id,
                     'amount': amount,
                     'duration' : duration,

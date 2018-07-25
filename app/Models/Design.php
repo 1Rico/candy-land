@@ -17,4 +17,9 @@ class Design extends Model implements HasMedia
         return $this->belongsTo(Store::class);
     }
 
+    public function tailor()
+    {
+        return $this->belongsTo(Tailor::class);
+    }
+
 }

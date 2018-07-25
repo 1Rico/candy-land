@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateMeasurementsTable
+ */
 class CreateMeasurementsTable extends Migration
 {
     /**
@@ -27,7 +30,7 @@ class CreateMeasurementsTable extends Migration
             $table->double('pant_or_skirt_length')->default(0.0);
             $table->double('inseam')->default(0.0);
             $table->double('wrist')->default(0.0);
-            $table->integer('user_id');
+            $table->integer('user_id')->unique();
             $table->timestamps();
         });
     }

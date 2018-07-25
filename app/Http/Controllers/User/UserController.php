@@ -1,20 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Models\Design;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class UserController extends Controller
 {
-    /**
-     * UserController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
+   /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -22,6 +16,14 @@ class UserController extends Controller
     public function index()
     {
        return view('user.dashboard');
+    }
+
+    public function getDesigns()
+    {
+        $designs = Design::all();
+        $user = Auth::guard('web')->User();
+//        dd($user->measurement);
+        return view('user.designs', compact('designs','user'));
     }
 
 }

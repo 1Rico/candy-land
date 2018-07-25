@@ -7,7 +7,6 @@
 @section('page-css')
     <link href="{{ asset('assets/node_modules/dropzone-master/dist/dropzone.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/pages/floating-label.css') }}" rel="stylesheet">
-    <link href="{{ asset('cassets/node_modules/typeahead.js-master/dist/typehead-min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -45,15 +44,15 @@
                         <div class="card-body">
                             <h4 class="card-title">Animated Line Inputs Form With Floating Labels</h4>
                             <h6 class="card-subtitle">Just add <code>floating-labels</code> class to the form.</h6>
-                            <form class="floating-labels m-t-40" method="post" action="{{route('tailor.designs.save')}}">
+                            <form class="floating-labels m-t-40" enctype="multipart/form-data" method="post" action="{{route('tailor.designs.save')}}" id="design-form">
                                 @csrf
                                 <div class="form-group m-b-40">
                                     <select class="form-control p-0" id="input5" name="store_id" required>
-                                        <option selected disabled="">Select a Store</option>
+                                        <option selected disabled>Select a Store</option>
                                         @forelse($tailor->stores as $store)
                                             <option value="{{$store->id}}">{{$store->name ?? 'Unknown'}}</option>
                                         @empty
-                                            <option selected disabled="">Please Create a Store First</option>
+                                            <option selected disabled>Please Create a Store First</option>
                                         @endforelse
                                     </select><span class="bar"></span>
                                     <label for="input5">Select Store</label>
@@ -63,10 +62,17 @@
                                     <span class="bar"></span>
                                     <label for="input1">Name</label>
                                 </div>
-                                <div class="form-group m-b-40">
-                                    <input type="number" class="form-control" id="input2" name="amount" min="10" required>
-                                    <span class="bar"></span>
-                                    <label for="input2">Amount</label>
+                                <div class="row">
+                                    <div class="form-group col-md-6 m-b-40">
+                                        <input type="number" class="form-control" id="input2" name="amount" min="10" required>
+                                        <span class="bar"></span>
+                                        <label for="input2">Amount</label>
+                                    </div>
+                                    <div class="form-group col-md-6 m-b-40">
+                                        <input type="number" class="form-control" id="input4" name="duration" min="1" required>
+                                        <span class="bar"></span>
+                                        <label for="input2">How Long To Make This? (Days)</label>
+                                    </div>
                                 </div>
                                 <div class="form-group m-b-40">
                                     <input type="number" class="form-control" id="input3" name="discount_amount" min="10" required>
@@ -86,6 +92,9 @@
                                     <span class="bar"></span>
                                     <label for="input7">Description</label>
                                 </div>
+
+                                <input class="form-control" type="file" name="image[]" multiple required>
+
                                 <div>
                                     <button type="submit" class="btn btn-purple">Save Design</button>
                                 </div>
@@ -97,10 +106,10 @@
                     <div class="card fixed-height">
                         <div class="card-body">
                             <h4 class="card-title">Dropzone</h4>
-                            <h6 class="card-subtitle">For multiple file upload put class <code>.dropzone</code> to form.</h6>
-                            <form action="#" class="dropzone">
+                            <h6 class="card-subtitle">Please Select Design Templates <code>.dropzone</code> to form.</h6>
+                            <form action="{{route('tailor.designs.save')}}" class="dropzone" method="post" enctype="multipart/form-data" id="file-form">
                                 <div class="fallback">
-                                    <input name="file" type="file" multiple />
+                                    <input name="file" required type="file" multiple data-default-file="{{ asset('assets/node_modules/dropify/src/images/test-image-1.jpg') }}" />
                                 </div>
                             </form>
                         </div>
@@ -122,4 +131,17 @@
 
 @section('page-js')
     <script src="{{ asset('assets/node_modules/dropzone-master/dist/dropzone.js') }}"></script>
+    <script>
+//        $(function () {
+//            $('#submit-button').click( function (){
+//                $('#file-form').submit();
+//            });
+//        });
+//$('#file-form').submit(function (event) {
+//    if(!this.checkValidity())
+//    {
+//        event.preventDefault();
+//    }
+//});
+    </script>
 @endsection

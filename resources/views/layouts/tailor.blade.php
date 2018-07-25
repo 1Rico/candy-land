@@ -267,7 +267,7 @@
                 <ul id="sidebarnav">
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Dashboard</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="{{ route('tailor.designs') }}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Designs</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Orders</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('tailor.orders') }}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Orders</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Coupons</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Messages</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Dispute</span></a></li>

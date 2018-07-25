@@ -19,8 +19,8 @@ class CreateDesignsTable extends Migration
             $table->text('description')->nullable();
             $table->double('amount')->default(0.0);
             $table->double('discount_amount')->default(0.0);
-            $table->integer('status')->default(1)->comment('Availability');
-
+            $table->integer('duration')->comment('Duration in weeks to complete design')->nullable();
+            $table->integer('status')->default(1)->comment('Availability')->default(1);
             $table->integer('store_id');
             $table->timestamps();
         });

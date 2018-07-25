@@ -58,12 +58,12 @@ class RegisterController extends Controller
             $validatedData['activation_code'] = str_random(30).time();
             $validatedData['gender'] = $request->gender;
             $user  = app(User::class)->create($validatedData);
-
+            $user->notify(new sendUserActivation($user));
         } catch (\Exception $exception) {
             logger()->error($exception);
             return redirect()->back()->with('error', 'Unable to create new user.');
         }
-       $user->notify(new sendUserActivation($user));
+
         return redirect()->route('user.dashboard')->with('success', 'Successfully created a new account. Please check your email and activate your account.');
     }
 

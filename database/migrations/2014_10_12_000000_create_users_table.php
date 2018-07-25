@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
+            $table->string('delivery_address')->nullable();
             $table->string('phone');
             $table->string('email')->unique();
             $table->string('password');
@@ -32,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->boolean('status')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

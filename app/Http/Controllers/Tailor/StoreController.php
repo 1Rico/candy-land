@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Store;
 use Auth;
 use Crypt;
-use encrypt;
 
 
 /**
