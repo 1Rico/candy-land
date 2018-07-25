@@ -89,9 +89,14 @@ class TailorOrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $order = Order::findOrFail($request->order_id);
+        $status = $request->status;
+        $order->status= $status;
+        $order->save();
+
+        return redirect()->action('Tailor\TailorOrderController@show', Crypt::encryptString($order->id))->with('success', 'Order status has been updated!');
     }
 
     /**

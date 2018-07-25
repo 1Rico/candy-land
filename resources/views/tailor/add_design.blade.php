@@ -48,7 +48,6 @@
                                 @csrf
                                 <div class="form-group m-b-40">
                                     <select class="form-control p-0" id="input5" name="store_id" required>
-                                        <option selected disabled>Select a Store</option>
                                         @forelse($tailor->stores as $store)
                                             <option value="{{$store->id}}">{{$store->name ?? 'Unknown'}}</option>
                                         @empty

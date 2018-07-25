@@ -43,15 +43,44 @@
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
+            <div class="row">
+                <div id="update-order-modal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog modal-sm">
+                        <form method="post" action="{{route('tailor.orders.update')}}">
+                            @csrf
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Order Status</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group m-b-5">
+                                        <select class="form-control p-0" id="input5" name="status" required>
+                                            <option value=3>New Order</option>
+                                            <option value=2>I'm Sewing</option>
+                                            <option value=1>I'm Done</option>
+                                            <option value=0>I've Delivered</option>
+                                            </select><span class="bar"></span>
+                                        <input type="hidden" name="order_id" value="{{$order->id}}">
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-danger waves-effect waves-light">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-info">
-                            <h4 class="m-b-0 text-white">Please Treat Every Order With Urgency/h4>
+                            <h4 class="m-b-0 text-white">Please Treat Every Order With Urgency</h4>
                         </div>
                         <div class="card-body">
-                            <form class="form-horizontal" role="form">
                                 <div class="form-body">
 
                                     <h3 class="box-title">Client Measurement</h3>
@@ -312,15 +341,14 @@
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <div class="col-md-offset-3 col-md-9">
-                                                    <button type="submit" class="btn btn-danger"> <i class="fa fa-pencil"></i> Edit</button>
-                                                    <button type="button" class="btn btn-inverse">Cancel</button>
+                                                    <button class="btn btn-danger" data-toggle="modal" data-target="#update-order-modal"> <i class="fa fa-pencil"></i> Update Status</button>
+                                                    {{--<button type="button" class="btn btn-inverse">Cancel</button>--}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6"> </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

@@ -56,6 +56,7 @@ Route::group(['prefix' => 'tailor'], function() {
         Route::post('designs/save', 'DesignController@saveDesign')->name('tailor.designs.save');
         Route::get('orders', 'TailorOrderController@index')->name('tailor.orders');
         Route::get('orders/{id}', 'TailorOrderController@show')->name('tailor.orders.view');
+        Route::post('orders/update', 'TailorOrderController@update')->name('tailor.orders.update');
 
     });
 });
