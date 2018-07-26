@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->text('about')->nullable();
             $table->string('activation_code')->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

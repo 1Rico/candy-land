@@ -20,9 +20,9 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group {{ $errors->has('email') ? ' has-danger' : '' }}">
+                    <div class="form-group {{ $errors->has('password') ? ' has-danger' : '' }}">
                         <div class="col-xs-12">
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" minlength="6" class="form-control" name="password" required>
 
                             @if ($errors->has('password'))
                                 <div class="form-control-feedback">{{ $errors->first('password') }}</div>

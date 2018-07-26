@@ -46,6 +46,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
                             <div class="modal-body">
+                                @if($user->measurement)
                                 <div class="row" id="page1">
                                     <div class="col-sm-6">
                                         <div class="form-group">
@@ -101,6 +102,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
 
                                 <div class="row" id="page2" style="display: none;">
                                     <div class="col-lg-12">
@@ -181,7 +183,7 @@
                         <!-- Card -->
                         <div class="card" >
                             <div class="card-body">
-                                <h4 class="card-title">No Designs Available FOr Now!</h4>
+                                <h4 class="card-title">No Designs Available For Now!</h4>
                                 <p class="card-text">Please check back at a later time.</p>
                                 {{--<a href="javascript:void(0)" class="btn btn-primary">Make Order</a>--}}
                             </div>
@@ -203,36 +205,6 @@
                                     <h4 class="card-title">Google map</h4>
                                     <h6 class="card-subtitle">You can use Googlemap with popup just add class with <code>popup-gmaps</code></h6>
                                     <a class="popup-gmaps btn btn-info" href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&amp;hl=en&amp;t=v&amp;hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom">Open Google Map</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="image-popups" class="row">
-                                <div class="col-lg-2 col-md-4">
-                                    <a href="../assets/images/big/img1.jpg" data-effect="mfp-zoom-in"><img src="../assets/images/big/img1.jpg" class="img-responsive" />
-                                        <br/>Zoom</a>
-                                </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <a href="../assets/images/big/img2.jpg" data-effect="mfp-newspaper"><img src="../assets/images/big/img2.jpg" class="img-responsive" />
-                                        <br/>Newspaper</a>
-                                </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <a href="../assets/images/big/img3.jpg" data-effect="mfp-move-horizontal"><img src="../assets/images/big/img3.jpg" class="img-responsive" />
-                                        <br/>Horizontal move</a>
-                                </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <a href="../assets/images/big/img4.jpg" data-effect="mfp-move-from-top"><img src="../assets/images/big/img4.jpg" class="img-responsive" />
-                                        <br/>Move from top</a>
-                                </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <a href="../assets/images/big/img5.jpg" data-effect="mfp-3d-unfold"><img src="../assets/images/big/img5.jpg" class="img-responsive" />
-                                        <br/>3d unfold</a>
-                                </div>
-                                <div class="col-lg-2 col-md-4">
-                                    <a href="../assets/images/big/img6.jpg" data-effect="mfp-zoom-out"><img src="../assets/images/big/img5.jpg" class="img-responsive" />
-                                        <br/>Zoom-out</a>
                                 </div>
                             </div>
                         </div>

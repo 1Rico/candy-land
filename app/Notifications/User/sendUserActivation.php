@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Models\User;
 
-class sendUserActivation extends Notification
+class sendUserActivation extends Notification implements ShouldQueue
 {
     use Queueable;
     protected $user;

@@ -15,6 +15,7 @@
     <link href="{{ asset('css/pages/login-register-lock.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -64,5 +65,8 @@
         $("#recoverform").fadeIn();
     });
 </script>
+<script src="{{ asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
+{{--Notifications--}}
+@include('notifications.notification')
 </body>
 </html>

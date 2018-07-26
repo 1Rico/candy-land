@@ -1,9 +1,10 @@
 <script>
     $(function() {
-        var errorMessage = "{{ session('error') }} ";
         var successMessage = "{{ session('success') }}";
+        var errorMessage = "{{ session('error') }}";
         var infomessage = "{{ session('message') }}";
         var warningMessage = "{{ session('warning')}}";
+
 
         "use strict";
         if(infomessage){
@@ -30,6 +31,20 @@
             });
 
         }
+
+        if(errorMessage){
+            $.toast({
+                heading: 'Error',
+                text: errorMessage,
+                position: 'top-right',
+                loaderBg:'#ff6849',
+                icon: 'error',
+                hideAfter: 6500,
+                stack: 6
+            });
+
+        }
+
         if(successMessage){
             $.toast({
                 heading: 'Success',

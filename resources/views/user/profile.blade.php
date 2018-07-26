@@ -6,6 +6,15 @@
 
 @section('content')
     <div class="page-wrapper">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+    @endif
         <!-- ============================================================== -->
         <!-- Container fluid  -->
         <!-- ============================================================== -->
@@ -42,7 +51,7 @@
                             <center class="m-t-30"> <img src="../assets/images/users/5.jpg" class="img-circle" width="150" />
                                 <h4 class="card-title m-t-10">{{$user->firstname}} {{$user->lastname}}</h4>
                                 <h6 class="card-subtitle">{{$user->address}}</h6>
-                                <h6 class="card-subtitle">{{$user->date_of_birth->format('l jS F')}}</h6>
+                                <h6 class="card-subtitle">{{$user->date_of_birth ? $user->date_of_birth->format('l jS F') : ''}}</h6>
                                 <div class="row text-center justify-content-md-center">
                                     <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
                                     <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
@@ -83,7 +92,7 @@
                                         <div class="form-group">
                                             <label class="col-md-12">First Name</label>
                                             <div class="col-md-12">
-                                                <input type="text" name="firstname" value="{{$user->firstname}}" class="form-control form-control-line" required>
+                                                <input type="text" name="firstname" value="{{ $user->firstname}}" class="form-control form-control-line" required>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -141,18 +150,19 @@
                             </div>
                             <div class="tab-pane " id="password" role="tabpanel">
                                 <div class="card-body">
-                                    <form class="form-horizontal form-material" method="post" action="">
+                                    <form class="form-horizontal form-material" method="post" action="{{ route('user.profile.update') }}">
+                                        @csrf
                                         <div class="form-group">
                                             <label class="col-md-12">Current Password</label>
                                             <div class="col-md-12">
-                                                <input type="password" placeholder="Current Password" name ="password" class="form-control form-control-line">
+                                                <input type="password" placeholder="Current Password" name ="old_password" class="form-control form-control-line">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <label class="col-md-12">New Password</label>
                                             <div class="col-md-12">
-                                                <input type="password" placeholder="Current Password" name="password_confirmation " class="form-control form-control-line">
+                                                <input type="password" placeholder="Current Password" name="password " class="form-control form-control-line">
                                             </div>
                                         </div>
 
@@ -160,7 +170,7 @@
                                         <div class="form-group">
                                             <label class="col-md-12">Repeat Password</label>
                                             <div class="col-md-12">
-                                                <input type="password" value="password" name="repeat_password" class="form-control form-control-line">
+                                                <input type="password" value="password" name="password_confirmation" class="form-control form-control-line">
                                             </div>
                                         </div>
 

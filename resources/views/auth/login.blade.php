@@ -7,6 +7,15 @@
 @section('content')
     <section id="wrapper" class="login-register login-sidebar" style="background-image:url(assets/images/background/login-register.jpg);">
         <div class="login-box card">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card-body">
                 <form class="form-horizontal form-material" method="post" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                     @csrf
@@ -20,9 +29,9 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group {{ $errors->has('email') ? ' has-danger' : '' }}">
+                    <div class="form-group {{ $errors->has('password') ? ' has-danger' : '' }}">
                         <div class="col-xs-12">
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input id="password" type="password" minlength="6" class="form-control" name="password" required>
 
                             @if ($errors->has('password'))
                                 <div class="form-control-feedback">{{ $errors->first('password') }}</div>

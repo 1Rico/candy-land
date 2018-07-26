@@ -236,7 +236,13 @@
                             <a class="dropdown-item" href="pages-profile.html"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>
                             <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();"><i class="fa fa-power-off m-r-5 m-l-5"></i> Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                             <div class="dropdown-divider"></div>
                             <div class="p-l-30 p-10"><a href="javascript:void(0)" class="btn btn-sm btn-success btn-rounded">View Profile</a></div>
                         </div>
@@ -317,15 +323,6 @@
 
     @yield('content')
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <!-- ============================================================== -->
     <!-- End Page wrapper  -->
@@ -363,7 +360,6 @@
 <!--sparkline JavaScript -->
 <script src="{{ asset('assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
-{{--<script src="{{  asset('js/pages/toastr.js') }}"></script>--}}
 {{--Notifications--}}
 
 @include('notifications.notification')

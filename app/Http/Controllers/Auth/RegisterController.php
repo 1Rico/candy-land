@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Notifications\User\sendUserActivation;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Session;
+
 
 class RegisterController extends Controller
 {
@@ -43,28 +44,51 @@ class RegisterController extends Controller
     }
 
 
-    protected function register(Request $request)
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
     {
-        /** @var User $user */
-        $validatedData = $request->validate([
-            'firstname'     => 'required|string|max:255',
-            'lastname'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|unique:users',
+        return Validator::make($data, [
+            'firstname' => 'required|string|max:255',
+//            'midname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'gender' => 'required|integer|max:255',
+            'phone' => 'required|string|max:15|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
-        try {
-            $validatedData['password']        =Hash::make(array_get($validatedData, 'password'));
-            $validatedData['activation_code'] = str_random(30).time();
-            $validatedData['gender'] = $request->gender;
-            $user  = app(User::class)->create($validatedData);
-            $user->notify(new sendUserActivation($user));
-        } catch (\Exception $exception) {
-            logger()->error($exception);
-            return redirect()->back()->with('error', 'Unable to create new user.');
-        }
+    }
 
-        return redirect()->route('user.dashboard')->with('success', 'Successfully created a new account. Please check your email and activate your account.');
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function create(array $data)
+    {
+        $user = new User();
+        $reference = str_random(30).time();
+//        $user->generateReference();
+
+        $user  = $user->create([
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'phone' => $data['phone'],
+            'gender' => $data['gender'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'activation_code' => $reference
+//            'avatar' => 'public/defaults/avatars/default.png'
+        ]);
+
+        $user->notify((new sendUserActivation($user))->delay(now()->addSeconds(2)));
+        Session::flash('message', 'Welcome. Please complete your profile to continue');
+        return $user;
     }
 
     /**

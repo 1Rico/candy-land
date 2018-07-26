@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Hash;
 
 class ProfileController extends Controller
 {
@@ -23,7 +24,26 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
+        $validatedData = $request->validate([
+            'firstname'     => 'string|max:255',
+            'lastname'     => 'string|max:255',
+//            'phone' => 'unique:users',
+            'password' => 'string|min:6|confirmed',
+        ]);
+
         $user = \Auth::guard('web')->user();
+
+        if($request->has('old_password')){
+            $old_password = $request->old_password;
+            if(Hash::check($old_password, $user->getAuthPassword()) == false){
+                return redirect()->back()->with('error', 'Your current password is incorrect');
+            }
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return redirect()->action('User\ProfileController@index')->with('success', 'Password updated successfully!');
+        }
+
+
         $data = $request->all();
         $user->update($data);
 
