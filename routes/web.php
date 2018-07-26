@@ -23,7 +23,8 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth'], 'namespace' => 'Us
     Route::get('designs', 'UserController@getDesigns')->name('user.designs');
     Route::post('designs/order', 'UserOrderController@create')->name('user.order.create');
     Route::get('orders', 'UserOrderController@index')->name('user.orders');
-    Route::get('profile', function () { return view('user.profile'); })->name('user.profile');
+    Route::get('profile', 'ProfileController@index')->name('user.profile');
+    Route::post('profile/update', 'ProfileController@update')->name('user.profile.update');
     Route::get('measurements', 'MeasurementController@getMeasurements')->name('user.measurements');
     Route::post('measurements/save', 'MeasurementController@saveMeasurement')->name('user.measurements.save');
 });

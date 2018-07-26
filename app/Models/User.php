@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-//use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
-//    use softDeletes;
+    use softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +17,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
+
+    protected $dates = [
+        'date_of_birth'
+        ];
 
     /**
      * @var array

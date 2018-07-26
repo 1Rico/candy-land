@@ -14,6 +14,7 @@
     <!-- This page CSS -->
     <!-- Custom CSS -->
     <link href="{{ asset('css/style.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <link href="{{ asset('css/pages/other-pages.css') }}" rel="stylesheet">
 

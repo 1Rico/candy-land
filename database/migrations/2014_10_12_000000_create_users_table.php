@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('midname')->nullable();
             $table->string('lastname');
             $table->integer('gender')-> comment('1 - MALE, 2 - FEMALE');
-            $table->date('birthday')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
