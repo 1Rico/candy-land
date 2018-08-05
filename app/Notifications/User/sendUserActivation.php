@@ -24,7 +24,6 @@ class sendUserActivation extends Notification implements ShouldQueue
     }
 
 
-
     /**
      * Get the notification's delivery channels.
      *

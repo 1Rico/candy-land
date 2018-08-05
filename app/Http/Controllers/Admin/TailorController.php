@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Order;
-use Carbon\Carbon;
+use App\Http\Controllers\Controller;
+use App\Models\Tailor;
 
-class UserOrderController extends Controller
+class TailorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class UserOrderController extends Controller
      */
     public function index()
     {
-        $user = \Auth::guard('web')->User();
-        $orders = Order::where('user_id', $user->id)->get();
-        return view('user.orders', compact('orders', 'user'));
+        $tailors = Tailor::orderBy('created_at', 'DESC')->get();
+//        dd($tailors);
+        return view('admin.tailors', compact('tailors'));
     }
 
     /**
@@ -26,27 +25,13 @@ class UserOrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $request = json_decode($request->data);
-        $completion_date = Carbon::now(3)->addDays($request->duration);
-
-        $order = new Order();
-        $order->reference = '12112';
-        $order->amount = $request->amount;
-        $order->completion_date = $completion_date;
-        $order->delivery_address = $request->delivery_address;
-        $order->user_id = $request->user_id;
-        $order->tailor_id = $request->tailor_id;
-        $order->design_id = $request->design_id;
-
-        $order->save();
-
-        return redirect()->action('User\UserOrderController@index')->with('success', 'Order has been made!');
+        //
     }
 
     /**
-     * Store a newly created resource in storage.a
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

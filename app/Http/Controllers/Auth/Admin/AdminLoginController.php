@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Tailor;
+namespace App\Http\Controllers\Auth\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use Route;
 
-class TailorLoginController extends Controller
+class AdminLoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest:tailor', ['except' => ['logout']]);
+        $this->middleware('guest:admin', ['except' => ['logout']]);
     }
 
     public function showLoginForm()
     {
-        return view('auth.tailor.tailor_login');
+        return view('auth.admin.admin_login');
     }
 
     public function login(Request $request)
@@ -28,9 +28,9 @@ class TailorLoginController extends Controller
         ]);
 
         // Attempt to log the user in
-        if (Auth::guard('tailor')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // if successful, then redirect to their intended location
-            return redirect()->intended(route('tailor.dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
         // if unsuccessful, then redirect back to the login with the form data
         return redirect()->back()->withInput($request->only('email', 'remember'));
@@ -38,7 +38,7 @@ class TailorLoginController extends Controller
 
     public function logout()
     {
-        Auth::guard('tailor')->logout();
-        return redirect('/tailor');
+        Auth::guard('admin')->logout();
+        return redirect('/kdadmin');
     }
 }

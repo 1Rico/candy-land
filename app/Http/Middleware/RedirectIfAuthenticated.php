@@ -20,7 +20,8 @@ class RedirectIfAuthenticated
         switch ($guard) {
             case 'tailor':
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('tailor.dashboard');
+                    return redirect()->intended(route('tailor.dashboard'));
+//                        ->route('tailor.dashboard');
                 }
                 break;
             case 'partner':
@@ -35,7 +36,8 @@ class RedirectIfAuthenticated
                 break;
             default:
                 if (Auth::guard($guard)->check()) {
-                    return redirect()->route('user.dashboard');
+                    return redirect()->intended(route('user.dashboard'));
+//                    return redirect()->route('user.dashboard');
                 }
                 break;
         }

@@ -37,7 +37,7 @@ class TailorRegisterController extends Controller
         ]);
 
         if($tailor && Auth::guard('tailor')->attempt(['email' => $tailor->email, 'password' => $password])){
-            dd(Auth::guard('tailor')->User()->status);
+//            dd(Auth::guard('tailor')->User()->status);
 
             // if successful, then redirect to their intended location
             return redirect()->intended(route('tailor.dashboard'));

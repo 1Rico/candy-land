@@ -1,4 +1,4 @@
-@extends('layouts.user')
+@extends('layouts.admin')
 
 @section('title')
     Tailors
@@ -15,13 +15,13 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h4 class="text-themecolor">Datatable</h4>
+                    <h4 class="text-themecolor">Kadi Tailors</h4>
                 </div>
                 <div class="col-md-7 align-self-center text-right">
                     <div class="d-flex justify-content-end align-items-center">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                            <li class="breadcrumb-item active">Datatable</li>
+                            <li class="breadcrumb-item active">Tailors</li>
                         </ol>
                         <button type="button" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Create New</button>
                     </div>
@@ -37,9 +37,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Orders</h4>
-                            <h6 class="card-subtitle">View Design Orders</h6>
+                            <h4 class="card-title">Tailors</h4>
+                            <h6 class="card-subtitle">All tailors</h6>
                             <div class="table-responsive m-t-40">
+
                                 <table id="myTable" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
@@ -59,7 +60,7 @@
                                             <td>{{$tailor->lastname}}</td>
                                             <td>{{$tailor->email}}</td>
                                             <td>{{$tailor->phone}}</td>
-                                            <td><span class="{{$class}}">{{$tailor->status}}</span></td>
+                                            <td><span>{{$tailor->status}}</span></td>
                                             <td>{{$tailor->created_at->format('jS F, Y')}}</td>
                                         </tr>
                                     @empty

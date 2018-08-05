@@ -19,32 +19,55 @@ class MeasurementController extends Controller
 
     public function saveMeasurement(Request $request)
     {
-        // Validate the form data
-        $this->validate($request, [
-            'neck'   => 'required|string|min:1|max:255',
-            'chest_bust' => 'required|string|min:1|max:255',
-            'shoulder_width' => 'required|string|min:1|max:255',
-            'arm_hole' => 'required|string|min:1|max:255',
-            'arm_or_sleeve_length' => 'required|string|min:1|max:255',
-            'pant_or_skirt_length' => 'required|string|min:1|max:255',
-            'inseam' => 'required|string|min:1|max:255',
-            'wrist' => 'required|string|min:1|max:255',
-            'high_bust' => 'required|string|min:1|max:255',
-            'under_bust' => 'required|string|min:1|max:255',
-            'waist' => 'required|string|min:1|max:255',
-            'hips' => 'required|string|min:1|max:255'
-        ]);
+        $user = Auth::guard('web')->user();
+        $measurement = $request['data'];
 
-        $measurement = $request->all();
-        $measurement['user_id'] = Auth::guard('web')->User()->id;
-        try{
-            Measurement::create($measurement);
-        } catch (\Exception $exception) {
-            logger()->error($exception);
-            return redirect()->back()->with('error', 'Measurement could not be saved!');
+        //see how to use updateOrCreate
+        //if user has no measurements already, create one
+        if(!$user->measurement){
+            $measurement['user_id'] = Auth::guard('web')->User()->id;
+//            return response()->json(array('measurement'=> $measurement), 200);
+            try{
+                Measurement::create($measurement);
+                return response()->json(array('measurements'=> $measurement), 200);
+            } catch (\Exception $exception) {
+                logger()->error($exception);
+                return response()->json(array('error'=> $exception), 200);
+            }
+        } else {
+            try {
+                $data = $user->measurement;
+                $data->update($measurement);
+                $request->session()->flash('success', 'New customer added successfully.');
+                return response()->json($request);
+//                return response()->json(array('measurement2'=> $data), 200);
+            } catch(\Exception $exception){
+                logger()->error($exception);
+                return response()->json(array('error2'=> $exception), 200);
+            }
         }
 
-        return redirect()->action('User\MeasurementController@getMeasurements')->with('success', 'Measurement Added Successfully');
+
+        // Validate the form data
+//        $this->validate($request, [
+//            'neck'   => 'required|string|min:1|max:255',
+//            'chest_bust' => 'required|string|min:1|max:255',
+//            'shoulder_width' => 'required|string|min:1|max:255',
+//            'arm_hole' => 'required|string|min:1|max:255',
+//            'arm_or_sleeve_length' => 'required|string|min:1|max:255',
+//            'pant_or_skirt_length' => 'required|string|min:1|max:255',
+//            'inseam' => 'required|string|min:1|max:255',
+//            'wrist' => 'required|string|min:1|max:255',
+//            'high_bust' => 'required|string|min:1|max:255',
+//            'under_bust' => 'required|string|min:1|max:255',
+//            'waist' => 'required|string|min:1|max:255',
+//            'hips' => 'required|string|min:1|max:255'
+//        ]);
+
+
+
+
+//        return redirect()->action('User\MeasurementController@getMeasurements')->with('success', 'Measurement Added Successfully');
 
     }
 

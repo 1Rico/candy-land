@@ -53,7 +53,7 @@
                                                 <form method="post" action="{{ route('user.order.create') }}" enctype="multipart/form-data">
                                                     @csrf
                                                     <h4 class="card-title" id="tailor_name"></h4>
-                                                    <p class="card-text" id="description"></p>
+                                                    <p class="card-text"  id="description"></p>
                                                     <hr>
                                                     <p class="card-text" id="amount">
                                                         <br><small class="text-danger" id="discount_amount" style="text-decoration: line-through">24000</small></p>
@@ -81,23 +81,26 @@
                         <!-- Card -->
                         <div class="card">
                             <div class="zoom-gallery row m-t-30">
-                                <div class="col-md-4">
-                                    <a href="{{ $images[0]->getUrl() }}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{ $images[0]->getUrl() }}" class="img-responsive" alt="img" /> </a>
+                                <div class="col-md-12">
+                                    <a href="{{ $images[0]->getUrl() }}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{ $images[0]->getUrl('thumb') }}" class="img-responsive" alt="img" /> </a>
                                 </div>
-                                <div class="col-md-4">
-                                    <a href="{{ $images[1]->getUrl() }}" title="This image fits only horizontally."> <img src="{{ $images[1]->getUrl() }}" class="img-responsive" alt="img" /> </a>
+                                <div class="col-md-4 hide">
+                                    <a href="{{ $images[1]->getUrl() }}" title="This image fits only horizontally."> <img src="{{ $images[1]->getUrl('thumb') }}" class="img-responsive" alt="img" /> </a>
                                 </div>
-                                <div class="col-md-4">
-                                    <a href="{{ $images[2]->getUrl() }}"> <img src="{{ $images[2]->getUrl() }}" class="img-responsive" alt="img" /> </a>
-                                </div>
+                                @if(isset($images[2]))
+                                    <div class="col-md-4 hide">
+                                        <a href="{{ $images[2]->getUrl()  ?? '#' }}"> <img src="{{ $images[2]->getUrl('thumb') }}" class="img-responsive" alt="img" /> </a>
+                                    </div>
+                                @endif
 
                                 {{--<div class="col-md-4 hide">--}}
                                 {{--<a href="{{ $images[2]->getUrl() ?? $images[2]->getUrl() }}"> <img src="{{ $images[2]->getUrl() ?? $images[2]->getUrl() }}" class="img-responsive" alt="img" /> </a>--}}
                                 {{--</div>--}}
                             </div>
+                            {{--<img class="card-img-top img-responsive" src="../assets/images/big/img1.jpg" alt="Card image cap">--}}
                             <div class="card-body">
                                 <h4 class="card-title">{{$design->name}}</h4>
-                                <p class="card-text">{{$design->description}}</p>
+                                {{--<p class="card-text">{{$design->description}}</p>--}}
                                 <p class="card-text">Designer: <a href="javascript:void(0)">{{$design->store->tailor->firstname}} {{$design->store->tailor->lastname}}</a></p>
                                 <p class="card-text">Store: <a href="javascript:void(0)">{{$design->store->name ?? ''}}</a></p>
 
@@ -149,36 +152,7 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="card">--}}
-                        {{--<div class="card-body">--}}
-                            {{--<div id="image-popups" class="row">--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img1.jpg" data-effect="mfp-zoom-in"><img src="../assets/images/big/img1.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Zoom</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img2.jpg" data-effect="mfp-newspaper"><img src="../assets/images/big/img2.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Newspaper</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img3.jpg" data-effect="mfp-move-horizontal"><img src="../assets/images/big/img3.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Horizontal move</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img4.jpg" data-effect="mfp-move-from-top"><img src="../assets/images/big/img4.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Move from top</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img5.jpg" data-effect="mfp-3d-unfold"><img src="../assets/images/big/img5.jpg" class="img-responsive" />--}}
-                                        {{--<br/>3d unfold</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-2 col-md-4">--}}
-                                    {{--<a href="../assets/images/big/img6.jpg" data-effect="mfp-zoom-out"><img src="../assets/images/big/img5.jpg" class="img-responsive" />--}}
-                                        {{--<br/>Zoom-out</a>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -224,7 +198,7 @@
                 var modal = $(this)
                 modal.find('#name').text(name);
                 modal.find('#tailor_name').text('By: '+ tailor_name);
-                modal.find('#description').text(description);
+//                modal.find('#description').text(description);
                 modal.find('#amount').text('Price: NGN'+ amount);
                 modal.find('#discount_amount').text(discount_amount);
                 modal.find('#data').val(JSON.stringify(order_data));

@@ -32,7 +32,7 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth'], 'namespace' => 'Us
 
 
 Route::group(['prefix' => 'tailor'], function() {
-    //Authentication & Registration
+    //Tailor Authentication & Registration
     Route::group(['namespace' => 'Auth\Tailor'], function() {
         //auth(login)
         Route::get('login', 'TailorLoginController@showLoginForm')->name('tailor.login');
@@ -47,8 +47,8 @@ Route::group(['prefix' => 'tailor'], function() {
     Route::group(['namespace' => 'Tailor', 'middleware' => ['auth:tailor']], function() {
 
         Route::get('/', 'TailorController@index')->name('tailor.dashboard');
-        Route::get('profile', function () { return view('tailor.profile'); })->name('tailor.profile');
-//        Route::get('profile', 'ProfileContoller@index' )->name('tailor.profile');
+        Route::get('profile', 'ProfileController@index' )->name('tailor.profile');
+        Route::post('profile/update', 'ProfileController@update')->name('tailor.profile.update');
         Route::get('stores', 'StoreController@getstores')->name('tailor.stores');
         Route::get('stores/{id}', 'StoreController@viewstore')->name('tailor.stores.view');
         Route::post('stores/save', 'StoreController@saveStore')->name('tailor.stores.new');
@@ -59,5 +59,26 @@ Route::group(['prefix' => 'tailor'], function() {
         Route::get('orders/{id}', 'TailorOrderController@show')->name('tailor.orders.view');
         Route::post('orders/update', 'TailorOrderController@update')->name('tailor.orders.update');
 
+    });
+});
+
+Route::group(['prefix' => 'kdadmin'], function() {
+    //Admin Authentication & Registration
+    Route::group(['namespace' => 'Auth\Admin'], function () {
+        //auth(login)
+        Route::get('login', 'AdminLoginController@showLoginForm')->name('admin.login');
+        Route::post('login', 'AdminLoginController@login')->name('admin.login.submit');
+        Route::get('logout', 'AdminLoginController@logout')->name('admin.logout');
+
+        //auth(register)
+//        Route::view('register', 'auth.admin.admin_register');
+        Route::post('register', 'AdminRegisterController@Register')->name('admin.register');
+    });
+
+    Route::group(['namespace' => 'Admin', 'middleware' => ['auth:admin']], function() {
+
+        Route::get('/', 'AdminController@index')->name('admin.dashboard');
+        Route::get('tailors', 'TailorController@index')->name('admin.tailors');
+        Route::get('users', 'UserController@index')->name('admin.users');
     });
 });

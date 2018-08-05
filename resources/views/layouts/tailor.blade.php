@@ -271,8 +271,15 @@
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Coupons</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Messages</span></a></li>
                     <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Dispute</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Payments</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Account</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Payments</span></a></li><li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-layout-media-right-alt"></i><span class="hide-menu">Account</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{ route('tailor.profile') }}">Profile</a></li>
+                            <li><a href="{{ route('tailor.profile') }}">Password</a></li>
+                            <li><a href="form-addons.html">Notification</a></li>
+                            <li><a href="{{ route('tailor.profile') }}">Addresses</a></li>
+                            <li><a href="form-float-input.html">Payments</a></li>
+                        </ul>
+                    </li>
                     <li> <a class="waves-effect waves-dark" href="{{route('tailor.stores')}}" aria-expanded="false"><i class="icon-speedometer"></i><span class="hide-menu">Stores</span></a></li>
                 </ul>
             </nav>

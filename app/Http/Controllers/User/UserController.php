@@ -15,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.dashboard');
+        $user = Auth::guard('web')->user();
+        $orders = $user->orders()->latest(7);
+        return view('user.dashboard', compact('user', 'orders'));
     }
 
     public function getDesigns()

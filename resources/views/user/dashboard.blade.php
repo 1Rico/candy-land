@@ -14,14 +14,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Simple Toastr Alerts</h4>
+                    <h4 class="card-title">My Dashboard</h4>
                     <h6 class="card-subtitle">You can use four different alert <code>info, warning, success, and error</code> message.</h6>
-                    <div class="button-box">
-                        <button class="tst1 btn btn-info">Info Message</button>
-                        <button class="tst2 btn btn-warning">Warning Message</button>
-                        <button class="tst3 btn btn-success">Success Message</button>
-                        <button class="tst4 btn btn-danger">Danger Message</button>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -36,7 +31,7 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h4 class="text-themecolor">Dashboard 2</h4>
+                    <h4 class="text-themecolor">Hi {{$user->firstname}}!</h4>
                 </div>
                 <div class="col-md-7 align-self-center text-right">
                     <div class="d-flex justify-content-end align-items-center">
@@ -57,143 +52,60 @@
             <div class="row">
                 <!-- Column -->
                 <div class="col-lg-7">
-                    <div class="card">
+                    <div class="card fixed-height">
                         <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <h4 class="card-title">Projects of the Month</h4>
-                                <select class="custom-select w-25 ml-auto">
-                                    <option selected="">January</option>
-                                    <option value="1">February</option>
-                                    <option value="2">March</option>
-                                    <option value="3">April</option>
-                                </select>
-                            </div>
+
                             <div class="table-responsive m-t-30">
                                 <table class="table stylish-table">
                                     <thead>
                                     <tr>
-                                        <th colspan="2">Assigned</th>
-                                        <th>Name</th>
-                                        <th>Priority</th>
-                                        <th>Budget</th>
+                                        <th colspan="2">Design</th>
+                                        <th>Tailor</th>
+                                        <th>Status</th>
+                                        <th>Created</th>
+                                        <th>Expected</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td style="width:50px;">
-                                            <span class="round">S</span>
-                                        </td>
-                                        <td>
-                                            <h6>Sunil Joshi</h6>
-                                            <small class="text-muted">Web Designer</small>
-                                        </td>
-                                        <td>Elite Admin</td>
-                                        <td>
-                                            <span class="label label-success">Low</span>
-                                        </td>
-                                        <td>$3.9K</td>
-                                    </tr>
-                                    <tr class="active">
-                                        <td>
-                                                    <span class="round">
-                                                        <img src="../assets/images/users/2.jpg" alt="user" width="50">
-                                                    </span>
-                                        </td>
-                                        <td>
-                                            <h6>Andrew</h6>
-                                            <small class="text-muted">Project Manager</small>
-                                        </td>
-                                        <td>Real Homes</td>
-                                        <td>
-                                            <span class="label label-info">Medium</span>
-                                        </td>
-                                        <td>$23.9K</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="round round-success">B</span>
-                                        </td>
-                                        <td>
-                                            <h6>Bhavesh patel</h6>
-                                            <small class="text-muted">Developer</small>
-                                        </td>
-                                        <td>MedicalPro Theme</td>
-                                        <td>
-                                            <span class="label label-danger">High</span>
-                                        </td>
-                                        <td>$12.9K</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="round round-primary">N</span>
-                                        </td>
-                                        <td>
-                                            <h6>Nirav Joshi</h6>
-                                            <small class="text-muted">Frontend Eng</small>
-                                        </td>
-                                        <td>Elite Admin</td>
-                                        <td>
-                                            <span class="label label-success">Low</span>
-                                        </td>
-                                        <td>$10.9K</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="round round-primary">N</span>
-                                        </td>
-                                        <td>
-                                            <h6>Nirav Joshi</h6>
-                                            <small class="text-muted">Frontend Eng</small>
-                                        </td>
-                                        <td>Elite Admin</td>
-                                        <td>
-                                            <span class="label label-success">Low</span>
-                                        </td>
-                                        <td>$10.9K</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span class="round round-primary">N</span>
-                                        </td>
-                                        <td>
-                                            <h6>Nirav Joshi</h6>
-                                            <small class="text-muted">Frontend Eng</small>
-                                        </td>
-                                        <td>Elite Admin</td>
-                                        <td>
-                                            <span class="label label-success">Low</span>
-                                        </td>
-                                        <td>$10.9K</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            <span class="round round-warning">M</span>
-                                        </td>
-                                        <td>
-                                            <h6>Micheal Doe</h6>
-                                            <small class="text-muted">Content Writer</small>
-                                        </td>
-                                        <td>Helping Hands</td>
-                                        <td>
-                                            <span class="label label-danger">High</span>
-                                        </td>
-                                        <td>$12.9K</td>
-                                    </tr>
+                                    @forelse($orders as $order)
                                     <tr>
                                         <td>
                                             <span class="round round-danger">N</span>
                                         </td>
                                         <td>
-                                            <h6>Johnathan</h6>
-                                            <small class="text-muted">Graphic</small>
+                                            <h6>{{$order->design->name ?? ''}}</h6>
+                                            <small class="text-muted">{{ str_limit($order->design->description ?? 'No description', $limit = 16, $end = '...') }}</small>
                                         </td>
-                                        <td>Digital Agency</td>
+                                        <td>{{$order->design->tailor->firstname ?? ''}} {{$order->design->tailor->lastname ?? ''}}</td>
                                         <td>
-                                            <span class="label label-danger">High</span>
+                                            @php
+                                                $status = $order->getOriginal('status');
+                                                switch ($status){
+                                                    case 3:
+                                                        $class = 'label label-danger';
+                                                    break;
+                                                    case 2:
+                                                        $class = 'label label-warning';
+                                                    break;
+                                                    case 1:
+                                                        $class = 'label label-primary';
+                                                    break;
+                                                    case 0:
+                                                        $class = 'label label-success';
+                                                    break;
+                                                    default:
+                                                        $class = 'label label-info';
+                                                    break;
+                                                }
+                                            @endphp
+                                            <span class="{{$class}}">{{$order->status}}</span>
                                         </td>
-                                        <td>$2.6K</td>
+                                        <td>{{$order->created_at->addDays($order->design->duration ? $order->design->duration : 0 )->format('l jS F, Y')}} </td>
+                                        <td>{{$order->created_at->format('l jS F, Y') ?? ''}}</td>
                                     </tr>
+                                        @empty
+                                        <td colspan="6" style="text-align: center">No Orders Yet!</td>
+                                    @endforelse
                                     </tbody>
                                 </table>
                             </div>

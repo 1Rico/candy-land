@@ -92,7 +92,7 @@
                                     <label for="input7">Description</label>
                                 </div>
 
-                                <input class="form-control" type="file" name="image[]" multiple required>
+                                <input class="form-control" type="file" name="image[]" maxlength=“1024 multiple required>
 
                                 <div>
                                     <button type="submit" class="btn btn-purple">Save Design</button>

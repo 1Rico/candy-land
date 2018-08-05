@@ -13,10 +13,10 @@ class DesignController extends Controller
 {
     private $photos_path;
 
-    public function __construct()
-    {
-        $this->photos_path = public_path('assets/images');
-    }
+//    public function __construct()
+//    {
+//        $this->photos_path = public_path('assets/images');
+//    }
 
     public function viewDesign()
     {
@@ -26,7 +26,7 @@ class DesignController extends Controller
     public function getDesigns()
     {
         $tailor = Auth::guard('tailor')->User();
-        $designs = $tailor->designs()->get();
+        $designs = $tailor->designs()->orderBy('created_at', 'DESC')->get();
         return view('tailor.designs', compact('tailor', 'designs'));
     }
 
@@ -48,6 +48,8 @@ class DesignController extends Controller
         $design->discount_amount = $request->discount_amount;
         $design->store_id = $request->store_id;
 
+        $design->save();
+
         $photos = $request->file('image');
         $filename = str_replace(' ','-',$design->name.sha1(date('YmdHis')));
 
@@ -57,22 +59,12 @@ class DesignController extends Controller
 //            $save_name = $name . '.' . $photo->getClientOriginalExtension();
 //            $resize_name = $name . str_random(2) . '.' . $photo->getClientOriginalExtension();
 
-            $design->save();
-
             $design
                 ->addMedia($photo)
                 ->usingName($filename)
+                ->withResponsiveImages()
                 ->toMediaCollection();
 
-//            Image::make($photo)
-//                ->resize(250, null, function ($constraints) {
-//                    $constraints->aspectRatio();
-//                });
-////                ->save($this->photos_path . '/' . $resize_name);
-//
-////            $photo->move($this->photos_path, $save_name);
-//
-//           dd($photo->getRealPath());
               }
 
 

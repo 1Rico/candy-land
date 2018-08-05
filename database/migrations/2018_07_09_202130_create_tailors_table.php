@@ -16,6 +16,7 @@ class CreateTailorsTable extends Migration
         Schema::create('tailors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('firstname');
+            $table->string('midname')->nullable();
             $table->string('lastname');
             $table->integer('gender')-> comment('1 - MALE, 2 - FEMALE');
             $table->string('phone')->nullable();

@@ -46,63 +46,63 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             </div>
                             <div class="modal-body">
-                                @if($user->measurement)
+
                                 <div class="row" id="page1">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="shoulder_width" class="control-label">Shoulder Width</label>
-                                            <input type="text" value="{{$user->measurement->shoulder_width}}" class="form-control" id="shoulder_width" name="shoulder_width" required>
+                                            <input type="text" value="{{$user->measurement->shoulder_width ?? ''}}" class="form-control" id="shoulder_width" name="shoulder_width" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="arm_hole" class="control-label">Arm Hole</label>
-                                            <input type="number" value="{{$user->measurement->arm_hole}}" class="form-control" id="arm_hole" name="arm_hole" required>
+                                            <input type="number" value="{{$user->measurement->arm_hole  ?? ''}}" class="form-control" id="arm_hole" name="arm_hole" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="arm_length" class="control-label">Arm Length</label>
-                                            <input type="text" class="form-control" value="{{$user->measurement->arm_or_sleeve_length}}" id="" name="arm_or_sleeve_length" required>
+                                            <input type="text" class="form-control" value="{{$user->measurement->arm_or_sleeve_length ?? ''}}" id="arm_or_sleeve_length" name="arm_or_sleeve_length" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="pant_length" class="control-label">Pant Length</label>
-                                            <input class="form-control" value="{{$user->measurement->pant_or_skirt_length}}" id="pant_or_skirt_length" name="pant_or_skirt_length" required />
+                                            <input class="form-control" value="{{$user->measurement->pant_or_skirt_length ?? ''}}" id="pant_or_skirt_length" name="pant_or_skirt_length" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="inseam" class="control-label">Inseam:</label>
-                                            <input class="form-control" value="{{$user->measurement->inseam}}" id="inseam" name="inseam" required />
+                                            <input class="form-control" value="{{$user->measurement->inseam ?? ''}}" id="inseam" name="inseam" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="wrist" class="control-label">Wrist:</label>
-                                            <input class="form-control" value="{{$user->measurement->wrist}}" id="wrist" name="wrist" required />
+                                            <input class="form-control" value="{{$user->measurement->wrist ?? ''}}" id="wrist" name="wrist" required />
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="neck" class="control-label">Neck </label>
-                                            <input type="text" class="form-control" value="{{$user->measurement->neck}}" id="neck" name="neck" required>
+                                            <input type="text" class="form-control" value="{{$user->measurement->neck ?? ''}}" id="neck" name="neck" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="chest_bust" class="control-label">Chest Bust</label>
-                                            <input type="number" class="form-control" value="{{$user->measurement->chest_bust}}" id="chest_bust" name="chest_bust" required>
+                                            <input type="number" class="form-control" value="{{$user->measurement->chest_bust ?? ''}}" id="chest_bust" name="chest_bust" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="high_bust" class="control-label">Pant/High Burst</label>
-                                            <input type="text" class="form-control" value="{{$user->measurement->high_bust}}" id="high_bust" name="high_bust" required>
+                                            <input type="text" class="form-control" value="{{$user->measurement->high_bust ?? ''}}" id="high_bust" name="high_bust" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="under_bust" class="control-label">Under Wrist</label>
-                                            <input class="form-control" id="under_bust" value="{{$user->measurement->under_bust}}" name="under_bust" required />
+                                            <input class="form-control" id="under_bust" value="{{$user->measurement->under_bust ?? ''}}" name="under_bust" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="waist" class="control-label">Waist</label>
-                                            <input class="form-control" id="waist" name="waist" value="{{$user->measurement->waist}}" required />
+                                            <input class="form-control" id="waist" name="waist" value="{{$user->measurement->waist ?? ''}}" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="hips" class="control-label">Hips</label>
-                                            <input class="form-control" id="hips" name="hips" value="{{$user->measurement->hips}}" required />
+                                            <input class="form-control" id="hips" name="hips" value="{{$user->measurement->hips ?? ''}}" required />
                                         </div>
                                     </div>
-                                </div>
-                                @endif
+                                        <button id="save_measurement" class="btn btn-primary">Update Measurement</button>
+                                   </div>
 
                                 <div class="row" id="page2" style="display: none;">
                                     <div class="col-lg-12">
@@ -142,13 +142,14 @@
                         <div class="card">
                             <div class="zoom-gallery row m-t-30">
                                 <div class="col-md-4">
-                                    <a href="{{ $images[0]->getUrl() }}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{ $images[0]->getUrl() }}" class="img-responsive" alt="img" /> </a>
+                                    <a href="{{ $images[0]->getUrl() }}" title="Caption. Can be aligned to any side and contain any HTML."> <img src="{{ $images[0]->getUrl('thumb')  }}" class="img-responsive" alt="img" /> </a>
                                 </div>
                                 <div class="col-md-4">
-                                    <a href="{{ $images[1]->getUrl() }}" title="This image fits only horizontally."> <img src="{{ $images[1]->getUrl() }}" class="img-responsive" alt="img" /> </a>
+                                    <a href="{{ $images[1]->getUrl() }}" title="This image fits only horizontally."> <img src="{{ $images[1]->getUrl('thumb')  }}" class="img-responsive" alt="img" /> </a>
                                 </div>
+
                                 <div class="col-md-4">
-                                    <a href="{{ $images[2]->getUrl() }}"> <img src="{{ $images[2]->getUrl() }}" class="img-responsive" alt="img" /> </a>
+                                    <a href="{{ $images[1]->getUrl() }}"> <img src="{{ $images[1]->getUrl('thumb')  }}" class="img-responsive" alt="img" /> </a>
                                 </div>
 
                                 {{--<div class="col-md-4 hide">--}}
@@ -168,7 +169,7 @@
                                 data-discount_amount={{$design->discount_amount}}
                                 data-description="{{$design->description}}"
                                 data-design_id={{$design->id}}
-                                data-delivery_address = "{{$design->delivery_address}}"
+                                data-delivery_address = "{{$user->delivery_address}}"
                                 data-duration = "{{$design->duration}}"
                                 data-name="{{$design->name}}"
                                 data-amount={{$design->amount}}
@@ -183,7 +184,7 @@
                         <!-- Card -->
                         <div class="card" >
                             <div class="card-body">
-                                <h4 class="card-title">No Designs Available For Now!</h4>
+                                <h4 class="card-title">No Designs Available FOr Now!</h4>
                                 <p class="card-text">Please check back at a later time.</p>
                                 {{--<a href="javascript:void(0)" class="btn btn-primary">Make Order</a>--}}
                             </div>
@@ -227,6 +228,9 @@
     <script src="{{ asset('assets/node_modules/Magnific-Popup-master/dist/jquery.magnific-popup-init.js') }}"></script>
 
     <script>
+        var updateMeasurement = '{{ route('user.measurements.save') }}';
+        var token = '{{Session::token()}}';
+
         $(document).ready(function() {
             var user_id = '{{$user->id}}';
 
@@ -268,6 +272,47 @@
                 modal.find('#amount').text('Price: NGN'+ amount);
                 modal.find('#discount_amount').text(discount_amount);
                 modal.find('#data').val(JSON.stringify(order_data));
+            });
+        });
+
+        $('#save_measurement').on('click', function(event) {
+            var shoulder_width = $('#shoulder_width').val();
+            var arm_hole = $('#arm_hole').val();
+            var arm_or_sleeve_length = $('#arm_or_sleeve_length').val();
+            var pant_or_skirt_length = $('#pant_or_skirt_length').val();
+            var inseam = $('#inseam').val();
+            var wrist = $('#wrist').val();
+            var neck = $('#neck').val();
+            var chest_bust = $('#chest_bust').val();
+            var high_bust = $('#high_bust').val();
+            var under_bust = $('#under_bust').val();
+            var hips = $('#hips').val();
+            var waist = $('#waist').val();
+
+            var measurement = {
+                'shoulder_width' : shoulder_width,
+                'arm_hole': arm_hole,
+                'arm_or_sleeve_length': arm_or_sleeve_length,
+                'pant_or_skirt_length': pant_or_skirt_length,
+                'inseam': inseam,
+                'wrist': wrist,
+                'neck': neck,
+                'chest_bust': chest_bust,
+                'high_bust': high_bust,
+                'under_bust':under_bust,
+                'hips':hips,
+                'waist':waist
+            }
+
+            $.ajax({
+                method: "POST",
+                url: updateMeasurement,
+                data: {data: measurement, _token:token},
+                success: function(result) {
+                    console.log(result);
+                }, error: function(error) {
+                    console.log('error:', error);
+                },
             });
         });
     </script>

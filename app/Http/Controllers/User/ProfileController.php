@@ -35,12 +35,17 @@ class ProfileController extends Controller
 
         if($request->has('old_password')){
             $old_password = $request->old_password;
-            if(Hash::check($old_password, $user->getAuthPassword()) == false){
+            if(!(Hash::check($old_password, $user->password))){
                 return redirect()->back()->with('error', 'Your current password is incorrect');
             }
-            $user->password = Hash::make($request->password);
+
+            $validatedData = $request->validate([
+                'password' => 'required|string|min:6|confirmed'
+            ]);
+
+            $user->password = bcrypt($request->password);
             $user->save();
-            return redirect()->action('User\ProfileController@index')->with('success', 'Password updated successfully!');
+            return redirect()->action('Tailor\ProfileController@index')->with('success', 'Password updated successfully!');
         }
 
 

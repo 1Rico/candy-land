@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Tailor;
+namespace App\Http\Controllers\Auth\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Tailor;
+use App\Models\Admin;
 use Auth;
 
-class TailorRegisterController extends Controller
+class AdminRegisterController extends Controller
 {
-    protected $redirectPath = '/tailor';
+    protected $redirectPath = '/kdadmin';
 
 
     protected function Register(Request $request)
@@ -18,15 +18,15 @@ class TailorRegisterController extends Controller
         $rule = [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
-            'phone' => 'required|string|max:15|unique:tailors',
-            'email' => 'required|string|email|max:255|unique:tailors',
+            'phone' => 'required|string|max:15|unique:admins',
+            'email' => 'required|string|email|max:255|unique:admins',
             'password' => 'required|string|min:6|confirmed',
         ];
 
         $this->validate($request, $rule);
-        $tailor = new Tailor();
+        $admin = new Admin();
         $password = $request['password'];
-        $tailor = $tailor->create([
+        $admin = $admin->create([
             'firstname' => $request['firstname'],
             'lastname' => $request['lastname'],
             'gender' => $request['gender'],
@@ -36,11 +36,11 @@ class TailorRegisterController extends Controller
 //            'avatar' => 'public/defaults/avatars/default.png'
         ]);
 
-        if($tailor && Auth::guard('tailor')->attempt(['email' => $tailor->email, 'password' => $password])){
-//            dd(Auth::guard('tailor')->User()->status);
+        if($admin && Auth::guard('admin')->attempt(['email' => $admin->email, 'password' => $password])){
+//            dd(Auth::guard('admin')->User()->status);
 
             // if successful, then redirect to their intended location
-            return redirect()->intended(route('tailor.dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return redirect()->back()->with('failure', 'An error occurred. Please try again');
