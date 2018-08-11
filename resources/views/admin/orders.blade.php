@@ -44,24 +44,46 @@
                                 <table id="myTable" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Firstname</th>
-                                        <th>Lastname</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
+                                        <th>Client</th>
+                                        <th>Tailor</th>
+                                        <th>Design</th>
+                                        <th>Store</th>
                                         <th>Status</th>
-                                        <th>Date Joined</th>
+                                        <th>Date Created</th>
+                                        <th>Expected Completion</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @forelse($orders as $order)
                                         <tr>
-                                            <td>{{$order->firstname}}</td>
-                                            <td>{{$order->lastname}}</td>
-                                            <td>{{$order->email}}</td>
-                                            <td>{{$order->phone}}</td>
-                                            <td><span>{{$order->status}}</span></td>
-                                            <td>{{$order->created_at->format('jS F, Y')}}</td>
+                                            <td><a href="#">{{$order->user->firstname ?? ''}} {{$order->user->lastname ?? ''}}</a></td>
+                                            <td><a href="#">{{$order->design->store->tailor->firstname ?? '' }} {{$order->design->store->tailor->lastname ?? '' }}</a></td>
+                                            <td>{{$order->design->name ?? ''}}</td>
+                                            <td>{{$order->design->store->name ?? ''}}</td>
+                                            @php
+                                                $status = $order->getOriginal('status');
+                                                switch ($status){
+                                                    case 3:
+                                                        $class = 'label label-danger';
+                                                    break;
+                                                    case 2:
+                                                        $class = 'label label-warning';
+                                                    break;
+                                                    case 1:
+                                                        $class = 'label label-primary';
+                                                    break;
+                                                    case 0:
+                                                        $class = 'label label-success';
+                                                    break;
+                                                    default:
+                                                        $class = 'label label-info';
+                                                    break;
+                                                }
+                                            @endphp
+                                            <td><span class="{{$class}}">{{$order->status}}</span></td>
+                                            <td>{{$order->created_at->format('jS F, Y') ?? ''}}</td>
+                                            <td>{{$order->completion_date->format('jS F, Y') ?? ''}}</td>
                                         </tr>
                                     @empty
                                         <tr rowspan="6">No Orders Yet!</tr>

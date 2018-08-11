@@ -30,7 +30,6 @@ Route::group(['prefix' => 'portal', 'middleware' => ['auth'], 'namespace' => 'Us
 });
 
 
-
 Route::group(['prefix' => 'tailor'], function() {
     //Tailor Authentication & Registration
     Route::group(['namespace' => 'Auth\Tailor'], function() {
@@ -78,6 +77,7 @@ Route::group(['prefix' => 'kdadmin'], function() {
     Route::group(['namespace' => 'Admin', 'middleware' => ['auth:admin']], function() {
 
         Route::get('/', 'AdminController@index')->name('admin.dashboard');
+        Route::get('orders', 'OrderController@index')->name('admin.orders');
         Route::get('tailors', 'TailorController@index')->name('admin.tailors');
         Route::get('users', 'UserController@index')->name('admin.users');
     });

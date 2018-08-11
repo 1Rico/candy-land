@@ -29,21 +29,21 @@ class MeasurementController extends Controller
 //            return response()->json(array('measurement'=> $measurement), 200);
             try{
                 Measurement::create($measurement);
-                return response()->json(array('measurements'=> $measurement), 200);
+                return response()->json(array('status'=> 1, 'message' => 'Successfully updated measurement details.' ), 200);
             } catch (\Exception $exception) {
                 logger()->error($exception);
-                return response()->json(array('error'=> $exception), 200);
+                return response()->json(array('status'=> 0, 'message' => 'Unable to update measurement, please try again later.'), 200);
             }
         } else {
             try {
                 $data = $user->measurement;
                 $data->update($measurement);
                 $request->session()->flash('success', 'New customer added successfully.');
-                return response()->json($request);
+                return response()->json(array('status'=> 1, 'message' => 'Successfully updated measurement details.'));
 //                return response()->json(array('measurement2'=> $data), 200);
             } catch(\Exception $exception){
                 logger()->error($exception);
-                return response()->json(array('error2'=> $exception), 200);
+                return response()->json(array('status'=> 0, 'message' => 'Unable to update measurement, please try again later.'), 200);
             }
         }
 

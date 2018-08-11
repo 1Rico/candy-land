@@ -75,6 +75,7 @@
             </div>
             <div class="row">
                 @forelse($designs as $design)
+
                     @php $images = $design->getMedia();
                     @endphp
                     <div class="col-lg-3 col-md-6">

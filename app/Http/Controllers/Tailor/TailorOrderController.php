@@ -18,7 +18,7 @@ class TailorOrderController extends Controller
     {
         $tailor = \Auth::guard('tailor')->User();
         //recheck laravel scopes
-        $orders = Order::where('tailor_id', $tailor->id)->get();
+        $orders = Order::where('tailor_id', $tailor->id)->orderBy('created_at', 'desc')->get();
 
         return view('tailor.orders', compact('orders'));
     }

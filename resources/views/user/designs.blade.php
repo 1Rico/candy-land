@@ -103,6 +103,7 @@
                                     </div>
                                         <button id="save_measurement" class="btn btn-primary">Update Measurement</button>
                                    </div>
+                                <small class="" id="measurement_message">dd</small>
 
                                 <div class="row" id="page2" style="display: none;">
                                     <div class="col-lg-12">
@@ -244,6 +245,7 @@
             });
 
             $('#orderModal').on('show.bs.modal', function (event) {
+                $("#measurement_message").hide();
                 var button = $(event.relatedTarget); // Button that triggered the modal
                 var design_id = button.data('design_id');// Extract info from data-* attributes
                 var amount = button.data('amount');
@@ -309,7 +311,15 @@
                 url: updateMeasurement,
                 data: {data: measurement, _token:token},
                 success: function(result) {
-                    console.log(result);
+                    $("measurement_message").removeClass();
+                    $("#measurement_message").text(result['message']);
+
+                    if(result['status'] == 1){
+                        $("measurement_message").addClass('text-success');
+                    } else {
+                        $("measurement_message").addClass('text-danger');
+                    }
+                    $("#measurement_message").fadeIn();
                 }, error: function(error) {
                     console.log('error:', error);
                 },

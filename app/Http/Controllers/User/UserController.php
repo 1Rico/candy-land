@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function getDesigns()
     {
-        $designs = Design::all();
+        $designs = Design::whereStatus(1)->get();
         $user = Auth::guard('web')->User();
 //        dd($user->measurement);
         return view('user.designs', compact('designs','user'));

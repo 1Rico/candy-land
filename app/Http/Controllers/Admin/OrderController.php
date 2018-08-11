@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 
-class gitOrderController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.

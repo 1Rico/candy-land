@@ -26,6 +26,7 @@ class DesignController extends Controller
     public function getDesigns()
     {
         $tailor = Auth::guard('tailor')->User();
+        //find a away to only show designs that are of status 1
         $designs = $tailor->designs()->orderBy('created_at', 'DESC')->get();
         return view('tailor.designs', compact('tailor', 'designs'));
     }
