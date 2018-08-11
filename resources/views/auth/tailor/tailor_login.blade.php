@@ -5,8 +5,17 @@
 @endsection
 
 @section('content')
-    <section id="wrapper" class="login-register login-sidebar" style="background-image:url(assets/images/background/login-register.jpg);">
+    <section id="wrapper" class="login-register login-sidebar" style="background-image:url({{ asset('assets/images/background/login-register.jpg') }});">
         <div class="login-box card">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card-body">
                 <form class="form-horizontal form-material" method="post" action="{{ route('tailor.login') }}" aria-label="{{ __('Tailor Login') }}">
                     @csrf

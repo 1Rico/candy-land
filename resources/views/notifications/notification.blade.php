@@ -5,7 +5,6 @@
         var infomessage = "{{ session('message') }}";
         var warningMessage = "{{ session('warning')}}";
 
-
         "use strict";
         if(infomessage){
             $.toast({

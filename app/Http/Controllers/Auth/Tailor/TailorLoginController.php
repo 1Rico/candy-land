@@ -29,6 +29,10 @@ class TailorLoginController extends Controller
 
         // Attempt to log the user in
         if (Auth::guard('tailor')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+
+            if(Auth::guard('tailor')->user()->status == false) {
+                $this->logout('Inactive account');
+            }
             // if successful, then redirect to their intended location
             return redirect()->intended(route('tailor.dashboard'));
         }
@@ -36,9 +40,9 @@ class TailorLoginController extends Controller
         return redirect()->back()->withInput($request->only('email', 'remember'));
     }
 
-    public function logout()
+    public function logout($message = null)
     {
         Auth::guard('tailor')->logout();
-        return redirect('/tailor');
+        return redirect('/tailor/login')->with('warning', $message);
     }
 }

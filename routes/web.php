@@ -36,7 +36,7 @@ Route::group(['prefix' => 'tailor'], function() {
         //auth(login)
         Route::get('login', 'TailorLoginController@showLoginForm')->name('tailor.login');
         Route::post('login', 'TailorLoginController@login')->name('tailor.login.submit');
-        Route::get('logout', 'TailorLoginController@logout')->name('tailor.logout');
+        Route::get('logout{message?}', 'TailorLoginController@logout')->name('tailor.logout');
 
         //auth(register)
         Route::view('register', 'auth.tailor.tailor_register');

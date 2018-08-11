@@ -12,6 +12,7 @@ class Tailor extends Authenticatable
     use Notifiable;
     protected $guard = 'tailor';
 
+
     /**
      * The attributes that are mass assignable.
      *
